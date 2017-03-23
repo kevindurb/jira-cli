@@ -5,10 +5,30 @@
   "repository": "git@github.com:kevindurb/jira.git",
   "author": "Kevin Durbin <kevindurb@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "eslint": "eslint",
+    "lint": "yarn eslint -- .",
+    "lint-staged": "lint-staged"
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "lint-staged": {
+    "**/*.js": [
+      "eslint"
+    ]
+  },
   "bin": {
     "jira": "./index.js"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "commander": "^2.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-es2015": "^1.1.0",
+    "lint-staged": "^3.4.0",
+    "pre-commit": "^1.2.2"
   }
 }

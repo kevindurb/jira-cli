@@ -1,0 +1,7 @@
+{
+  "extends": "es2015/node",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+  },
+}
