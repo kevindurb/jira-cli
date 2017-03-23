@@ -1,1 +1,1 @@
-# Jira
+# Jira CLI
