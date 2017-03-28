@@ -7,5 +7,6 @@ app.version('1.0.0');
 
 require('./commands/login')(app);
 require('./commands/show')(app);
+require('./commands/open')(app);
 
 app.parse(process.argv);
