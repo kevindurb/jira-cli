@@ -14,3 +14,7 @@ require('./commands/assign')(app);
 require('./commands/help')(app);
 
 app.parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+  app.help();
+}
