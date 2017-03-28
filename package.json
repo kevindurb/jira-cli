@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "inquirer": "^3.0.6"
   },
   "devDependencies": {
     "eslint": "^3.18.0",
