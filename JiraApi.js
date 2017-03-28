@@ -20,4 +20,8 @@ class JiraApi {
 
 }
 
+JiraApi.create = ({ subdomain, auth }) => (
+  new JiraApi(subdomain, auth)
+);
+
 module.exports = JiraApi;

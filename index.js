@@ -6,5 +6,6 @@ const login = require('./commands/login');
 app.version('1.0.0');
 
 require('./commands/login')(app);
+require('./commands/show')(app);
 
 app.parse(process.argv);

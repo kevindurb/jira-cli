@@ -1,11 +1,11 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
-const path = require('path');
+const cred = require('../credentials');
 
-const CONFIG_FILE = path.join(
-  process.env.HOME,
-  '.jira_credentials'
-);
+const subdomainQuestion = {
+  type: 'input',
+  name: 'subdomain',
+  message: 'Subdomain:',
+};
 
 const usernameQuestion = {
   type: 'input',
@@ -21,28 +21,10 @@ const passwordQuestion = {
 
 const requestInformation = () => (
   inquirer.prompt([
+    subdomainQuestion,
     usernameQuestion,
     passwordQuestion,
   ])
-);
-
-const storeCredentials = (credentials) => (
-  new Promise((resolve, reject) => {
-    fs.writeFile(
-      CONFIG_FILE,
-      JSON.stringify({
-        username: credentials.username,
-        password: credentials.password,
-      }),
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      }
-    );
-  })
 );
 
 module.exports = (app) => {
@@ -51,7 +33,7 @@ module.exports = (app) => {
   .description('store auth information')
   .action(() => {
     requestInformation()
-    .then(storeCredentials)
+    .then(cred.storeCredentials)
     .then(() => {
       console.log('credentials stored!');
     });
