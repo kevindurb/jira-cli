@@ -14,11 +14,11 @@ const getBaseIssueData = result => (
 );
 
 const presentIssue = (issue) => {
-  console.log(chalk.underline.bold(getKey(issue)));
-  console.log(chalk.underline.bold('summary:'), getSummary(issue));
-  console.log(chalk.underline.bold('assignee:'), getAssignee(issue));
-  console.log(chalk.underline.bold('status:'), getStatus(issue));
-  console.log(chalk.underline.bold('description:'));
+  console.log(chalk.blue.underline.bold(getKey(issue)));
+  console.log(chalk.green.underline.bold('summary:'), getSummary(issue));
+  console.log(chalk.green.underline.bold('assignee:'), getAssignee(issue));
+  console.log(chalk.green.underline.bold('status:'), getStatus(issue));
+  console.log(chalk.green.underline.bold('description:'));
   console.log(getDescription(issue));
 };
 
