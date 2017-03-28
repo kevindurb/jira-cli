@@ -6,9 +6,9 @@ const resultData = R.propOr({}, 'data');
 
 module.exports = (issue) => (
   JiraApi.connect()
-  .then((api) => {
-    return api.getIssue(issue);
-  })
+  .then((api) => (
+    api.getIssue(issue)
+  ))
   .then(resultData)
   .then(presentIssue)
 );

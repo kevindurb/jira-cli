@@ -10,6 +10,7 @@ app
 require('./commands/login')(app);
 require('./commands/show')(app);
 require('./commands/open')(app);
+require('./commands/assign')(app);
 require('./commands/help')(app);
 
 app.parse(process.argv);
