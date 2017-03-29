@@ -26,7 +26,7 @@ const transitionProp = R.propOr({}, 'transition');
 module.exports = (issue) => (
   JiraApi.connect()
   .then((api) => (
-    api.transitionsProp(issue)
+    api.getTransitions(issue)
   ))
   .then(h.dataProp)
   .then(transitionsProp)
