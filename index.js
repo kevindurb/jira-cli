@@ -13,6 +13,8 @@ require('./commands/assign')(app);
 require('./commands/transition')(app);
 require('./commands/comments')(app);
 require('./commands/add-comment')(app);
+require('./commands/search')(app);
+require('./commands/my-issues')(app);
 require('./commands/help')(app);
 
 app.parse(process.argv);
