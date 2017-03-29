@@ -4,10 +4,11 @@ const chalk = require('chalk');
 const getKey = R.propOr('', 'key');
 const getSummary = R.pathOr('', ['fields', 'summary']);
 const getStatus = R.pathOr('', ['fields', 'status', 'name']);
-const getAssignee = R.pathOr('', ['fields', 'assignee', 'displayName']);
+const getAssignee = R.pathOr('', ['fields', 'assignee', 'name']);
 const getDescription = R.pathOr('', ['fields', 'description']);
 
 module.exports = (issue) => {
+  console.log('');
   console.log(chalk.blue.underline.bold(getKey(issue)));
   console.log(chalk.green.underline.bold('summary:'), getSummary(issue));
   console.log(chalk.green.underline.bold('assignee:'), getAssignee(issue));
