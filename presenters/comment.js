@@ -1,4 +1,5 @@
 const R = require('ramda');
+const moment = require('moment');
 const chalk = require('chalk');
 
 const getCreatedTime = R.pathOr('', ['created']);
@@ -8,7 +9,11 @@ const getBody = R.pathOr('', ['body']);
 const separator = chalk.blue('---------------------------------------');
 
 module.exports = (comment) => {
-  const time = chalk.blue(getCreatedTime(comment));
+  const time = chalk.blue(
+    moment(
+      getCreatedTime(comment)
+    ).format('l LT')
+  );
   const author = chalk.blue(getAuthor(comment));
 
   console.log('');
