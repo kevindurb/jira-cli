@@ -2,7 +2,7 @@ const R = require('ramda');
 const inquirer = require('inquirer');
 const JiraApi = require('../lib/JiraApi');
 const show = require('./show');
-const helpers = require('../lib/helpers');
+const h = require('../lib/helpers');
 
 const selectTransition = (choices = []) => (
   inquirer.prompt([{
@@ -20,26 +20,25 @@ const buildChoiceArray = R.map(
   })
 );
 
-const resultData = R.propOr({}, 'data');
-const getTransitions = R.propOr({}, 'transitions');
-const getTransition = R.propOr({}, 'transition');
+const transitionsProp = R.propOr({}, 'transitions');
+const transitionProp = R.propOr({}, 'transition');
 
 module.exports = (issue) => (
   JiraApi.connect()
   .then((api) => (
-    api.getTransitions(issue)
+    api.transitionsProp(issue)
   ))
-  .then(resultData)
-  .then(getTransitions)
+  .then(h.dataProp)
+  .then(transitionsProp)
   .then(buildChoiceArray)
   .then(selectTransition)
-  .then(getTransition)
+  .then(transitionProp)
   .then(transition => (
     JiraApi.connect()
     .then(api => (
       api.doTransition(issue, transition)
     ))
-    .then(() => issue)
   ))
+  .then(h.pipe(issue))
   .then(show)
 );
