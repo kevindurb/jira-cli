@@ -15,10 +15,7 @@ module.exports = (issue) => (
   requestComment()
   .then(R.prop('comment'))
   .then(comment => (
-    JiraApi.connect()
-    .then((api) => (
-      api.addComment(issue, comment)
-    ))
+    JiraApi.run('addComment', issue, comment)
   ))
   .then(R.always(issue))
   .then(comments)

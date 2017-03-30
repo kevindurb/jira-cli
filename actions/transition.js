@@ -2,6 +2,7 @@ const R = require('ramda');
 const inquirer = require('inquirer');
 const JiraApi = require('../lib/JiraApi');
 const show = require('./show');
+const h = require('../lib/helpers');
 
 const selectTransition = (choices = []) => (
   inquirer.prompt([{
@@ -20,21 +21,17 @@ const buildChoiceArray = R.map(
 );
 
 module.exports = (issue) => (
-  JiraApi.connect()
-  .then((api) => (
-    api.getTransitions(issue)
-  ))
+  JiraApi.run('getTransitions', issue)
   .then(R.prop('data'))
   .then(R.prop('transitions'))
   .then(buildChoiceArray)
   .then(selectTransition)
   .then(R.prop('transition'))
   .then(transition => (
-    JiraApi.connect()
-    .then(api => (
-      api.doTransition(issue, transition)
-    ))
+    JiraApi.run('doTransition', issue, transition)
+    .catch(h.error(`could not transition ${issue} to ${transition}`))
   ))
   .then(R.always(issue))
   .then(show)
+  .catch(h.error(`could not get transitions for issue ${issue}`))
 );

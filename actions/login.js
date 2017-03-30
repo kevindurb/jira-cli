@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const cred = require('../lib/credentials');
+const h = require('../lib/helpers');
 
 const subdomainQuestion = {
   type: 'input',
@@ -30,8 +31,5 @@ const requestInformation = () => (
 module.exports = () => (
   requestInformation()
   .then(cred.storeCredentials)
-  .then((credentials) => {
-    console.log('credentials stored!');
-    return credentials;
-  })
+  .then(h.log('credentials stored!'))
 );
